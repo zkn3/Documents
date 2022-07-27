@@ -1,0 +1,79 @@
+step 1
+
+Goto Monitoring server in mobaXterm
+Go to /etc/prometheus
+
+edit or add url of new server into (vi) prometheus.yml via winscp in notepad 
+to avoid the error related to spacing
+
+
+start the service and check the status
+
+systemctl restart prometheus.service
+systemctl status prometheus.service
+If the status is inactive then start the services and apache on that server e.g:tdcvlhm31t1
+tomeeallstop
+tomeeallstart
+systemctl start -k httpd
+
+
+step 2
+
+now check the blackbox service 
+
+crontab -l
+ps -ef | grep blackbox
+
+
+if it running kill it
+pkill -u  root -f blackbox
+pkill -f blackbox
+
+and then run this command for the blackbox service 
+/etc/blackbox/blackbox_exporter/blackbox_cronjob_startup.sh > /tmp/blackbox_logs/blackbox_exporter.log &
+
+
+then check for the entry into the checkbox 
+http://tdcvlvmc12.dsone.3ds.com:9090/targets
+
+
+blackbox--url of the components
+node--no of machines/vm
+prometheus--self service
+
+step 3
+
+Add ther certificate from the server to monitering server  
+
+e.g.
+scp tdcvlhm31t1.crt root@tdcvlvmc12:/etc/ssl/certs/
+
+
+
+step 4
+
+now add the dashboard with two methods
+1) by duplicating any of the dashboard of services
+
+add the tiltle name and change the service name
+you have to manually added the alerts for al services
+
+
+In notification add the this data 
+
+Annotations:
+Alerting: This state represents service is Down!!!
+No Data: This state represents either Server or Blackbox exporter service is Down!!!
+OK: This state represents all services are WORKING!!!
+
+In queries change the service name all queries
+
+for alert use when,Or logical operation like 
+when last() of query (A 5m ,now) is outside range 199 to 200
+or   last() of query (B 5m ,now) is outside range 199 to 200.......continue
+
+2)By copying the dashborad and select the graph option above top right corner 
+past from some option select it 
+
+you will find the all alert as it is there just change the server name everywhere
+

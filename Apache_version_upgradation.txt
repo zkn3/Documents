@@ -1,0 +1,66 @@
+1. Get the zip package at 
+/home/data/media
+via 
+scp apache2.4.53.zip root@tdcvmlinhm14t1:/home/data/media/
+
+in media dir only
+unzip apache2.4.53.zip
+
+Go to Apache2 and update host name in 
+ /home/data/media/Apache2/conf/3dexperience.conf
+ 
+and add the include files from the winscp simultaneously with the server
+
+and also add time duration if it is different
+
+
+add the certificates from 
+cd /home/data/media/Apache2/conf/ssl/
+cp /usr/local/apache2/conf/ssl/* .
+
+
+then stop the services
+/usr/local/apache2/bin/httpd -k stop
+mv apache2 apache2.bckp
+
+cd /usr/local/
+mv /home/data/media/apache2 .
+
+then start the service again 
+/usr/local/apache2/bin/apachectl start
+/usr/local/apache2/bin/apachectl  -v
+
+then check for the services in browser
+
+
+
+
+#############################################################################
+
+/usr/local/apache2/bin/apachectl start
+/usr/local/apache2/bin/apachectl  -v
+
+ps -ef|grep httpd
+
+
+hostname -f
+
+vi /usr/local/apache2/conf/3dexperience.conf
+
+%s/tdcvmlinhm1t1/tdcvmlinhm21t1/g
+%s/tdcvmlinhm1t1/tdcvlhm22t1/g
+
+/usr/local/apache2/bin/httpd -k stop
+mv apache2 apache2.bckp 
+
+cd /usr/local/
+mv /home/data/media/apache2 .
+
+ds048
+h0ndaVMC   {end user}
+
+12t1 Server
+3DS@ds00(root password)
+
+
+
